@@ -96,31 +96,9 @@ uvicorn server:app --reload
 POST localhost:8000/shop_category
 # post input- image file in a multipart request
 ```
-##### output
-```
-{
-  "autoML": {
-    "veg-fresh": "0.015644",
-    "egg-fresh": "0.018934",
-    "meat-fresh": "0.947371",
-    "grocery": "0.018051"
-  },
-  "Mobilenet": {
-    "egg-fresh": "0.000000",
-    "grocery": "0.999906",
-    "meat-freah": "0.000094",
-    "veg-fresh": "0.000000"
-  }
-}
-```
-##### 2. rectify_category
-```
-POST localhost:8000/rectify
-# post input- image file in a multipart request
-```
 ##### Input image
 ![alt text](https://raw.githubusercontent.com/saurabh1993/shop_category_identification/master/temp.jpeg)
-##### Output
+##### output
 ```
 {
   "autoML": {
@@ -137,6 +115,16 @@ POST localhost:8000/rectify
   }
 }
 ```
+##### 2. rectify_category
+```
+POST localhost:8000/rectify
+# post input- image file in a multipart request
+```
+##### Input
+![alt text](https://raw.githubusercontent.com/saurabh1993/shop_category_identification/master/side.jpeg)
+##### Output
+![alt text](https://raw.githubusercontent.com/saurabh1993/shop_category_identification/master/right.jpeg)
+
 
 ### 7. Next steps
     1. Use text based recognition to identify she category-[chicken,bread,milk,fruit] etc<br>
