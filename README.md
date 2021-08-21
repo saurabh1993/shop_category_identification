@@ -3,14 +3,14 @@ This project aims to identify shop category-(fresh,retail) based on images provi
 
 ## Steps
 ### 1. Identify categories based on feature similarity<br>
-Images in the fresh category were very dissimilar like fruits/veggies shop were dissimilar to chicken/poultry shops<br>
-Therefore created seperate sub categories for the below categories<br>
-&nbsp;&nbsp;&nbsp;&nbsp;    a. Poultry-meat(meat-fresh)<br>
+Images in the fresh category had a very high variance example fruits/veggies shop images were dissimilar to chicken/poultry shops<br>
+Therefore I created seperate sub categories for the below categories(dairy and fresh images were categorized into further groups)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   a. Poultry-meat(meat-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies(meat-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   c. Misc(egg-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   d. grocery(grocery)<br>
 
-### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence manually added few training labels<br>
+### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence I also manually added few training categories<br>
 
 ### 3. Local Training 
 Mobilenet classifier was selected as the base model. Few extra layers for better complexity handling were added.<br>
@@ -42,7 +42,7 @@ from inference_local import localModel
 localModel =autoMLModel()
 Result=localModel.run('/home/dog.jpg')
 ```
-#### Output
+#### Example Output
 ```
 {
     "veg-fresh": "0.015644",
@@ -61,7 +61,7 @@ from inference_google import autoMLModel
 autoModel =autoMLModel()
 Result=autoModel.run('/home/dog.jpg')
 ```
-#### Output
+#### Examample Output
 ```
 {
     "veg-fresh": "0.015644",
