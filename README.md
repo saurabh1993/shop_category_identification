@@ -7,10 +7,10 @@ Images in the fresh category had a very high variance example fruits/veggies sho
 Therefore I created seperate sub categories for the below categories(dairy and fresh images were categorized into further groups)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   a. Poultry-meat(meat-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies(meat-fresh)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;   c. Misc(egg-fresh)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   c. Egg-dairy(egg-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   d. grocery(grocery)<br>
 
-### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence I also manually added few training categories<br>
+### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence I also manually added few images to some training categories<br>
 
 ### 3. Local Training 
 Mobilenet classifier was selected as the base model. Few extra layers for better complexity handling were added.<br>
@@ -86,7 +86,7 @@ Result=rec_model.run('/home/dog.jpg')# Returs jpeg buffer
 
 ```
 ### 6. Serving
-Created a rest based fast-api server with the below routes:<br>
+Created a rest based fast-api server to serve mobilenet+autoML model with the below routes:<br>
 To run the server<br>
 ```
 uvicorn server:app --reload
