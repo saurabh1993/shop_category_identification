@@ -3,13 +3,14 @@ This project aims to identify shop category-(fresh,retail) based on images provi
 
 ## Steps
 ### 1. Identify categories based on feature similarity<br>
-Images in the fresh category were very dissimilar like fruits/veggies shop were dissimilar to chicken/poultry shops<br>
-Therefore created seperate sub categories for the below categories<br>
-&nbsp;&nbsp;&nbsp;&nbsp;    a. Poultry-meat<br>
-&nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies<br>
-&nbsp;&nbsp;&nbsp;&nbsp;   c. Misc(eggs, bread)<br>
-<br>
-### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence manually added few training labels<br>
+Images in the fresh category had a very high variance example fruits/veggies shop images were dissimilar to chicken/poultry shops<br>
+Therefore I created seperate sub categories for the below categories(dairy and fresh images were categorized into further groups)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   a. Poultry-meat(meat-fresh)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies(meat-fresh)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   c. Misc(egg-fresh)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   d. grocery(grocery)<br>
+
+### 2. Balance the dataset - The dataset seemed to disbalanced in few categories. Hence I also manually added few training categories<br>
 
 ### 3. Local Training 
 Mobilenet classifier was selected as the base model. Few extra layers for better complexity handling were added.<br>
@@ -24,6 +25,10 @@ python3 training.py
 &nbsp;&nbsp;&nbsp;&nbsp; Training epochs :20<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Training batch-size :8<br>
 &nbsp;&nbsp;&nbsp;&nbsp; Training-validation data split : 0.8-0.2
+#### Training classes
+```
+CLASSES={0:"egg-fresh",1:"grocery",2:"meat-freah",3:"veg-fresh"}
+```
 #### Training Metrics:
 ![alt text](https://raw.githubusercontent.com/saurabh1993/shop_category_identification/master/local_evaluation.png)
 &nbsp;&nbsp;&nbsp;&nbsp; Training loss: 0.0291 <br>
@@ -37,7 +42,7 @@ from inference_local import localModel
 localModel =autoMLModel()
 Result=localModel.run('/home/dog.jpg')
 ```
-#### Output
+#### Example Output
 ```
 {
     "veg-fresh": "0.015644",
@@ -56,7 +61,7 @@ from inference_google import autoMLModel
 autoModel =autoMLModel()
 Result=autoModel.run('/home/dog.jpg')
 ```
-#### Output
+#### Examample Output
 ```
 {
     "veg-fresh": "0.015644",
@@ -112,6 +117,25 @@ POST localhost:8000/shop_category
 ```
 POST localhost:8000/rectify
 # post input- image file in a multipart request
+```
+##### Input image
+![alt text](https://raw.githubusercontent.com/saurabh1993/shop_category_identification/master/temp.jpeg)
+##### Output
+```
+{
+  "autoML": {
+    "veg-fresh": "0.827020",
+    "egg-fresh": "0.030735",
+    "meat-fresh": "0.040923",
+    "grocery": "0.101322"
+  },
+  "Mobilenet": {
+    "egg-fresh": "0.000000",
+    "grocery": "0.000365",
+    "meat-freah": "0.000011",
+    "veg-fresh": "0.999624"
+  }
+}
 ```
 
 ### 7. Next steps
