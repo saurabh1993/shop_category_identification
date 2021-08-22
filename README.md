@@ -102,16 +102,16 @@ POST localhost:8000/shop_category
 ```
 {
   "autoML": {
-    "veg-fresh": "0.827020",
-    "egg-fresh": "0.030735",
-    "meat-fresh": "0.040923",
-    "grocery": "0.101322"
+    "veg-fresh": "0.828243",
+    "egg-fresh": "0.054569",
+    "meat-fresh": "0.037253",
+    "grocery": "0.079934"
   },
   "Mobilenet": {
     "egg-fresh": "0.000000",
-    "grocery": "0.000365",
-    "meat-freah": "0.000011",
-    "veg-fresh": "0.999624"
+    "grocery": "0.000000",
+    "meat-freah": "0.000000",
+    "veg-fresh": "1.000000"
   }
 }
 ```
