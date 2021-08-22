@@ -1,12 +1,12 @@
 # Shop_category_identification
-This project aims to identify shop category-(fresh,retail) based on images provided by merchants
+This project aims to identify shop category-(fresh/retail) based on images.
 
 ## Steps
 ### 1. Identify categories based on feature similarity<br>
 Images in the fresh category had a very high variance example fruits/veggies shop images were dissimilar to chicken/poultry shops<br>
 Therefore I created seperate sub categories for the below categories(dairy and fresh images were categorized into further groups)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   a. Poultry-meat(meat-fresh)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies(meat-fresh)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   b. Fruits-veggies(veg-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   c. Egg-dairy(egg-fresh)<br>
 &nbsp;&nbsp;&nbsp;&nbsp;   d. grocery(grocery)<br>
 
@@ -15,7 +15,7 @@ Therefore I created seperate sub categories for the below categories(dairy and f
 ### 3. Local Training 
 Mobilenet classifier was selected as the base model. Few extra layers for better complexity handling were added.<br>
 Needed to tune the trainable layers based on training evaluation.Only extra added layers were set to trainable<br>
-To train- Run
+To train- Run the training script
 ```
 python3 training.py
 ```
@@ -127,7 +127,7 @@ POST localhost:8000/rectify
 
 
 ### 7. Next steps
-    1. Use text based recognition to identify she category-[chicken,bread,milk,fruit] etc<br>
+    1. Use text based recognition to identify she category-[chicken,bread,milk,fruit] etc <br>
     2. Use object detection based approach to identify shop categories-[apple,bird,specific object training like chips packets etc]<br>
 
 

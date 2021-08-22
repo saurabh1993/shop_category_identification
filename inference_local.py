@@ -16,20 +16,15 @@ import tensorflow as tf
 import cv2
 import json
 
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/meat-fresh/689350_f18d4ec7-3018-47ee-b4a3-ac7320d236e2.jpeg'
-pathx= '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/grocery/246781_88c67784-de0b-4bd6-8f85-4c4c959fb9ec.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/3184806_c5f7de1a-eacc-4ae3-ab99-bc20b1d5e313.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/1081018_5efe0420-6e98-4ecc-97e5-c2c8976f7b87.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/8838357_2129ea53-a8c4-400f-ade1-c9cc4a60b50a.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/9399798_0f4d6dd2-414b-4345-9aec-6f1327149a87.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/8283462_fcf4afdf-b15c-48e7-b9d9-7505b9317328.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/veg-fresh/8563665_5c05bb9d-4479-4a97-9064-75d42395ebf7.jpeg'
-pathx = '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/grocery/721756_996a0845-b21f-4614-9a53-9c134eeb7685.jpeg'
 
+'''This class is a wrapper for loading locally trained Mobilenet model'''
 class localModel():
     def __init__(self,modelPath='localModels/shop_cat3.h5'):
-        self.model = tf.keras.models.load_model('localModels/shop_cat3.h5')
+        
+        # Load the model from the model path
+        self.model = tf.keras.models.load_model(modelPath)
     
+    # Helper function to load and format image from the path
     def load_image(self,img_path, show=False):
 
         img = image.load_img(img_path, target_size=(150, 150))
@@ -39,9 +34,16 @@ class localModel():
         return img_tensor
     
     def run(self,pathx):
+        
         CLASSES={0:"egg-fresh",1:"grocery",2:"meat-freah",3:"veg-fresh"}
+        
+        # Load image
         img=self.load_image(pathx)
+        
+        # Do inferencing
         pred=self.model.predict(img)[0].tolist()
+        
+        # Format the results
         out ={}
         for idx,prob in enumerate(pred):
             out[CLASSES[idx]]="{:.6f}".format(prob)
@@ -50,4 +52,5 @@ class localModel():
 
 if __name__ == '__main__':
     model=localModel()
+    pathx="sample.jpg"
     print(json.dumps(model.run(pathx)))

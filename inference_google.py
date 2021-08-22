@@ -16,25 +16,28 @@ import tensorflow as tf
 import cv2
 import json
 
-
-
-pathx= '/Users/saurabh_veda/workspace_kumar/bharat_pe_task/train_data/meat-fresh/6385798_5a912afe-e6c8-452b-9248-c29b4c5de4bd.jpeg'
-
+'''This class is a wrapper for loading autoMl trained model'''
 class autoMLModel():
     def __init__(self,modelPath='autoMLModel'):
+        
+        # Load the model from the model path
         loaded = tf.saved_model.load(export_dir='autoMLModel')
         self.infer = loaded.signatures["serving_default"]
-        
+
     def run(self,pathx):
+        
+        # Read the image from the path and convert it to 
+        # consumable format
         img = cv2.imread(pathx)
         flag, bts = cv2.imencode('.jpg', img)
         inp = [bts[:,0].tobytes()]
-        #loaded = tf.saved_model.load(export_dir='autoMLModel')
-        #infer = loaded.signatures["serving_default"]
+        
+        # Do the inferencing
         out = self.infer(key=tf.constant('something_unique'), image_bytes=tf.constant(inp))
+        
+        # Format the results
         labels=np.array(out['labels'][0]).tolist()
         probs=np.array(out['scores'][0]).tolist()
-        #import pdb;pdb.set_trace()
         out={}
         for idx,label in enumerate(labels):
             out[label.decode('utf-8')]="{:.6f}".format(probs[idx])
@@ -45,5 +48,6 @@ class autoMLModel():
 
 if __name__ == '__main__':
     model=autoMLModel()
+    pathx="sample.jpg"
     print(json.dumps(model.run(pathx)))
     
